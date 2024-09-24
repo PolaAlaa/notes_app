@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/Views/widgets/Custom_AppBar_Widget.dart';
+import 'package:note_app/Views/widgets/add_Note_Bottom_Sheet.dart';
 import 'package:note_app/Views/widgets/note_list_View.dart';
 
 class NoteView extends StatelessWidget {
@@ -12,7 +13,13 @@ class NoteView extends StatelessWidget {
         onPressed: () {},
         backgroundColor: const Color.fromARGB(255, 62, 183, 239),
         child: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return AddNoteBottomSheet();
+                });
+          },
           icon: const Icon(
             Icons.add,
           ),
@@ -26,7 +33,7 @@ class NoteView extends StatelessWidget {
               height: 30,
             ),
             CustomAppBar(),
-            NoteListView(),
+            Expanded(child: NoteListView()),
           ],
         ),
       ),
