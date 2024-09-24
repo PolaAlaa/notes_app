@@ -20,9 +20,7 @@ class NoteView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16)),
                 context: context,
                 builder: (context) {
-                  return const AddNoteBottomSheet(
-                    title: "Title",
-                  );
+                  return const AddNoteBottomSheet();
                 });
           },
           icon: const Icon(
