@@ -15,9 +15,12 @@ class NoteView extends StatelessWidget {
         child: IconButton(
           onPressed: () {
             showModalBottomSheet(
+                backgroundColor: Colors.grey.shade900,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16)),
                 context: context,
                 builder: (context) {
-                  return AddNoteBottomSheet();
+                  return const AddNoteBottomSheet();
                 });
           },
           icon: const Icon(
