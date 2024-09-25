@@ -20,11 +20,11 @@ class Editnoteview extends StatelessWidget {
               SizedBox(
                 height: 35,
               ),
-              CustomTextField(title: "Title"),
+              CustomTextFormField(title: "Title"),
               SizedBox(
                 height: 15,
               ),
-              CustomTextField(
+              CustomTextFormField(
                 title: "Content",
                 maxline: 5,
               )

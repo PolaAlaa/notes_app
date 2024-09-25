@@ -4,14 +4,14 @@ import 'package:note_app/constants.dart';
 class AddBotton extends StatelessWidget {
   const AddBotton({
     super.key,
-    required this.context,
+    this.onTap,
   });
 
-  final BuildContext context;
-
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: onTap,
       child: Container(
         alignment: Alignment.center,
         height: 60,
