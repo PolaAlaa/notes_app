@@ -5,7 +5,7 @@ import 'package:note_app/Views/widgets/note_list_View.dart';
 
 class NoteView extends StatelessWidget {
   const NoteView({super.key});
-
+  static String id = "noteView";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,13 +29,13 @@ class NoteView extends StatelessWidget {
         ),
       ),
       body: const Padding(
-        padding: EdgeInsets.all(24),
+        padding: EdgeInsets.symmetric(vertical: 50, horizontal: 24),
         child: Column(
           children: [
-            SizedBox(
-              height: 30,
+            CustomAppBar(
+              text: "Notes",
+              icon: Icons.search,
             ),
-            CustomAppBar(),
             Expanded(child: NoteListView()),
           ],
         ),
