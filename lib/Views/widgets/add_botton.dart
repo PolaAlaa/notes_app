@@ -17,7 +17,7 @@ class AddBotton extends StatelessWidget {
         height: 60,
         width: MediaQuery.sizeOf(context).width,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(32), color: KPrimaryTextColor),
+            borderRadius: BorderRadius.circular(32), color: kPrimaryTextColor),
         child: const Text(
           "Add",
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
