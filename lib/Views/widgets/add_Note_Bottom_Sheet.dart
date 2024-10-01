@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:note_app/Cubit/Add_note_Cubit/add_Note_Cubit.dart';
 import 'package:note_app/Views/widgets/add_botton.dart';
 import 'package:note_app/Views/widgets/custom_Text_Field.dart';
+import 'package:note_app/models/note_Model.dart';
 
 class AddNoteBottomSheet extends StatelessWidget {
   const AddNoteBottomSheet({
@@ -12,25 +12,25 @@ class AddNoteBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AddNoteCubit, AddNoteState>(
-      listener: (context, state) {
-        if (state is AddNoteFaliur) {
-          debugPrint("faliure ${state.errorMessage}");
-        }
-        if (state is AddNoteSuccess) {
-          Navigator.pop(context);
-        }
-      },
-      builder: (context, state) {
-        return Padding(
+    return BlocProvider(
+      create: (context) => AddNoteCubit(),
+      child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-          child: SingleChildScrollView(
-            child: ModalProgressHUD(
-                inAsyncCall: state is AddNoteLoading ? true : false,
-                child: const AddNoteForm()),
-          ),
-        );
-      },
+          child: BlocConsumer<AddNoteCubit, AddNoteState>(
+            listener: (context, state) {
+              if (state is AddNoteFaliur) {
+                debugPrint("faliure ${state.errorMessage}");
+              }
+              if (state is AddNoteSuccess) {
+                Navigator.pop(context);
+              }
+            },
+            builder: (context, state) {
+              return const SingleChildScrollView(
+                child: AddNoteForm(),
+              );
+            },
+          )),
     );
   }
 }
@@ -75,14 +75,25 @@ class _AddNoteFormState extends State<AddNoteForm> {
           const SizedBox(
             height: 100,
           ),
-          AddBotton(
-            onTap: () {
-              if (formkey.currentState!.validate()) {
-                formkey.currentState!.save();
-              } else {
-                autovalidateMode = AutovalidateMode.always;
-                setState(() {});
-              }
+          BlocBuilder<AddNoteCubit, AddNoteState>(
+            builder: (context, state) {
+              return AddBotton(
+                isLoading: state is AddNoteLoading ? true : false,
+                onTap: () {
+                  if (formkey.currentState!.validate()) {
+                    formkey.currentState!.save();
+                    var note = NoteModel(
+                        title: title!,
+                        content: content!,
+                        date: DateTime.now().toString(),
+                        color: Colors.blue.value);
+                    BlocProvider.of<AddNoteCubit>(context).addNote(note);
+                  } else {
+                    autovalidateMode = AutovalidateMode.always;
+                    setState(() {});
+                  }
+                },
+              );
             },
           )
         ],
