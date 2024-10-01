@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Custom_Icon extends StatelessWidget {
-  const Custom_Icon({
+class CustomIcon extends StatelessWidget {
+  const CustomIcon({
     super.key,
     required this.icon,
   });

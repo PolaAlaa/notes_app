@@ -12,23 +12,23 @@ class AddNoteBottomSheet extends StatelessWidget {
     return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
       child: SingleChildScrollView(
-        child: addNoteForm(),
+        child: AddNoteForm(),
       ),
     );
   }
 }
 
-class addNoteForm extends StatefulWidget {
-  const addNoteForm({
+class AddNoteForm extends StatefulWidget {
+  const AddNoteForm({
     super.key,
   });
 
   @override
-  State<addNoteForm> createState() => _addNoteFormState();
+  State<AddNoteForm> createState() => _AddNoteFormState();
 }
 
 // ignore: camel_case_types
-class _addNoteFormState extends State<addNoteForm> {
+class _AddNoteFormState extends State<AddNoteForm> {
   String? title, content;
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   GlobalKey<FormState> formkey = GlobalKey();
