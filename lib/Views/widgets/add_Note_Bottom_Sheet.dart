@@ -15,7 +15,7 @@ class AddNoteBottomSheet extends StatelessWidget {
     return BlocConsumer<AddNoteCubit, AddNoteState>(
       listener: (context, state) {
         if (state is AddNoteFaliur) {
-          print("faliure ${state.errorMessage}");
+          debugPrint("faliure ${state.errorMessage}");
         }
         if (state is AddNoteSuccess) {
           Navigator.pop(context);
