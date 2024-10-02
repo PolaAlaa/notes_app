@@ -19,7 +19,7 @@ class AddNoteBottomSheet extends StatelessWidget {
               left: 16,
               right: 16,
               top: 32,
-              bottom: MediaQuery.of(context).viewInsets.bottom),
+              bottom: (MediaQuery.of(context).viewInsets.bottom) + 16),
           child: BlocConsumer<AddNoteCubit, AddNoteState>(
             listener: (context, state) {
               if (state is AddNoteFaliur) {
