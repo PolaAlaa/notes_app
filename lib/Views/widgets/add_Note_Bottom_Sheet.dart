@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note_app/Cubit/Add_note_Cubit/add_Note_Cubit.dart';
+import 'package:note_app/Cubit/note_Cubit/note_cubit_cubit.dart';
 import 'package:note_app/Views/widgets/add_botton.dart';
 import 'package:note_app/Views/widgets/custom_Text_Field.dart';
 import 'package:note_app/models/note_Model.dart';
@@ -20,20 +21,19 @@ class AddNoteBottomSheet extends StatelessWidget {
               right: 16,
               top: 32,
               bottom: (MediaQuery.of(context).viewInsets.bottom) + 16),
-          child: BlocConsumer<AddNoteCubit, AddNoteState>(
+          child: BlocListener<AddNoteCubit, AddNoteState>(
             listener: (context, state) {
               if (state is AddNoteFaliur) {
                 debugPrint("faliure ${state.errorMessage}");
               }
               if (state is AddNoteSuccess) {
+                BlocProvider.of<NotesCubit>(context).fetchAllNotes();
                 Navigator.pop(context);
               }
             },
-            builder: (context, state) {
-              return const SingleChildScrollView(
-                child: AddNoteForm(),
-              );
-            },
+            child: const SingleChildScrollView(
+              child: AddNoteForm(),
+            ),
           )),
     );
   }
