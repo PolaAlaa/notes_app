@@ -3,7 +3,10 @@ import 'package:note_app/Views/widgets/Custom_Icon_Widget.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar(
-      {super.key, required this.text, required this.icon, this.onPressed});
+      {super.key,
+      required this.text,
+      required this.icon,
+      required this.onPressed});
   final String text;
   final IconData icon;
   final void Function()? onPressed;
@@ -20,6 +23,7 @@ class CustomAppBar extends StatelessWidget {
         ),
         const Spacer(),
         CustomIcon(
+          onPressed: onPressed,
           icon: icon,
         ),
       ],

@@ -7,11 +7,14 @@ class CustomTextFormField extends StatelessWidget {
     required this.title,
     this.maxline = 1,
     this.onSaved,
+    this.onChanged,
   });
 
   final String? title;
   final int maxline;
   final void Function(String?)? onSaved;
+  final void Function(String?)? onChanged;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -22,6 +25,7 @@ class CustomTextFormField extends StatelessWidget {
             return null;
           }
         },
+        onChanged: onChanged,
         onSaved: onSaved,
         maxLines: maxline,
         style: const TextStyle(

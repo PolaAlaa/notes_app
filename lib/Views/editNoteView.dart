@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:note_app/Cubit/note_Cubit/note_cubit_cubit.dart';
 import 'package:note_app/Views/widgets/custom_AppBar_Widget.dart';
 import 'package:note_app/Views/widgets/custom_Text_Field.dart';
 import 'package:note_app/models/note_Model.dart';
@@ -19,26 +21,33 @@ class Editnoteview extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const CustomAppBar(
+              CustomAppBar(
+                onPressed: () {
+                  note.title = title == null ? note.title : title!;
+                  note.content = content ?? note.content;
+                  note.save();
+                  BlocProvider.of<NotesCubit>(context).fetchAllNotes();
+                  Navigator.pop(context);
+                },
                 text: "Edit Note",
-                icon: Icons.check,
+                icon: Icons.donut_large,
               ),
               const SizedBox(
                 height: 35,
               ),
               CustomTextFormField(
-                  onSaved: (p0) {
+                  onChanged: (p0) {
                     title = p0;
                   },
-                  title: "Title"),
+                  title: note.title),
               const SizedBox(
                 height: 15,
               ),
               CustomTextFormField(
-                onSaved: (p0) {
+                onChanged: (p0) {
                   content = p0;
                 },
-                title: "Content",
+                title: note.content,
                 maxline: 5,
               )
             ],
